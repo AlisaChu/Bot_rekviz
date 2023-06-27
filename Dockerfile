@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 
 # Copy the .env file and your Python script into the container
 COPY .env .env
-COPY your_script.py your_script.py
+COPY bot_rekviz.py bot_rekviz.py
 
 # Set the command to run when the container starts
-CMD [ "python", "./your_script.py" ]
+CMD [ "python", "./bot_rekviz.py" ]
