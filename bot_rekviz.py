@@ -36,8 +36,8 @@ https://www.instagram.com/lashtrainer_marafon/
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton(text='BEGIN', callback_data='begin'))
-    bot.send_message(message.chat.id, "Press BEGIN to get started.", reply_markup=markup)
+    markup.add(types.InlineKeyboardButton(text='НАЧАТЬ', callback_data='begin'))
+    bot.send_message(message.chat.id, "Привет! Здесь я расскажу тебе, как оплатить участие в первом международном online- проекте для LASH- тренеров.", reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: call.data == 'begin')
 def begin_callback(call):
