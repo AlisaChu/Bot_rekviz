@@ -1,5 +1,6 @@
 import telebot
 from dotenv import load_dotenv
+from telebot import types
 import os
 import time
 
@@ -23,22 +24,26 @@ https://www.instagram.com/lashtrainer_marafon/
 
 ТИНЬКОФФ 2200 7007 9399 6793
 
-Для оплаты взноса из ЕС напишите в бот слово "iban" и появятся реквизиты.
+Для оплаты взноса из ЕС нажмите кнопку "IBAN", вышлем реквизиты отдельно.
 
-Если вы не знаете, как оплатить участие из РБ, напишите в бот "Беларусь" и появятся реквизиты.
+Если вы не знаете, как оплатить участие из РБ, нажмите кнопку"БЕЛАРУСЬ", вышлем информацию по способам оплаты.
 
-СКРИН чека об оплате просьба прислать в Direct организаторам✅ или загрузить в бот.
+СКРИН чека об оплате просьба прислать в Direct организаторам✅.
 
 https://www.instagram.com/lashtrainer_marafon/
 """
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, start_message)
+    markup = types.ReplyKeyboardMarkup(row_width=2)
+    itembtn1 = types.KeyboardButton('Показать IBAN')
+    itembtn2 = types.KeyboardButton('Беларусь')
+    markup.add(itembtn1, itembtn2)
+    bot.send_message(message.chat.id, start_message, reply_markup=markup)
 
 @bot.message_handler(func=lambda message: True)
 def handle_messages(message):
-    if message.text == 'iban':
+    if message.text == 'Показать IBAN':
         bot.send_message(message.chat.id, "🇪🇺 Для оплаты в евро:\n\nIBAN: LT12 3250 0640 8072 8643\nБанк: REVOLUT\nПолучатель: Anna Zorina")
     elif message.text == 'Беларусь':
         bot.send_message(message.chat.id, "🇧🇾 Для оплаты из Республики Беларусь:\n\nТерминалы \"Qiwi\" ➡️ выбираете \"Переводы\" ➡️ \"Перевод на карту\"\nтам же будут перечислены банки РФ.\nВыбираете нужный банк➡️ оплачиваете.")
