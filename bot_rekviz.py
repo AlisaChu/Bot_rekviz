@@ -1,6 +1,11 @@
 import telebot
+from dotenv import load_dotenv
+import os
+import time
 
-API_TOKEN = 'YOUR_API_TOKEN'  # Replace with your Telegram Bot API token
+load_dotenv()
+
+API_TOKEN = os.getenv('TELEGRAM_API_KEY')  # Replace with your Telegram Bot API token
 
 bot = telebot.TeleBot(API_TOKEN)
 
@@ -31,4 +36,11 @@ https://www.instagram.com/lashtrainer_marafon/
 def send_welcome(message):
     bot.reply_to(message, start_message)
 
-# Rest of the code will be provided in the next message
+# The bot will keep running and listening to incoming messages
+while True:
+    try:
+        bot.polling(none_stop=True)
+
+    # If the bot loses connection, it will try to reconnect
+    except telebot.apihelper.ApiException:
+        time.sleep(15)
