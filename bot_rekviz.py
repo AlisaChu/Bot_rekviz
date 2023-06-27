@@ -25,7 +25,7 @@ https://www.instagram.com/lashtrainer_marafon/
 
 Для оплаты взноса из ЕС 🇪🇺 напишите в Direct "IBAN", вышлем реквизиты отдельно.
 
-🇧🇾 Если вы не знаете, как оплатить участие из РБ, напишите в Direct " БЕЛАРУСЬ" вышлем информацию по способам оплаты.
+🇧🇾 Если вы не знаете, как оплатить участие из РБ, напишите в Direct "БЕЛАРУСЬ", вышлем информацию по способам оплаты.
 
 СКРИН чека об оплате просьба прислать в Direct организаторам✅.
 
@@ -36,11 +36,16 @@ https://www.instagram.com/lashtrainer_marafon/
 def send_welcome(message):
     bot.send_message(message.chat.id, start_message)
 
+@bot.message_handler(func=lambda message: True)
+def handle_messages(message):
+    if message.text == 'Показать IBAN':
+        bot.send_message(message.chat.id, "🇪🇺 Для оплаты в евро:\n\nIBAN: LT12 3250 0640 8072 8643\nБанк: REVOLUT\nПолучатель: Anna Zorina")
+    elif message.text == 'Беларусь':
+        bot.send_message(message.chat.id, "🇧🇾 Для оплаты из Республики Беларусь:\n\nТерминалы \"Qiwi\" ➡️ выбираете \"Переводы\" ➡️ \"Перевод на карту\"\nтам же будут перечислены банки РФ.\nВыбираете нужный банк➡️ оплачиваете.")
+
 # The bot will keep running and listening to incoming messages
 while True:
     try:
         bot.polling(none_stop=True)
-
-    # If the bot loses connection, it will try to reconnect
     except telebot.apihelper.ApiException:
         time.sleep(15)
