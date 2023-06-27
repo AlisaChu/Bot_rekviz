@@ -1,5 +1,4 @@
 import telebot
-from telebot import types
 from dotenv import load_dotenv
 import os
 import time
@@ -35,13 +34,7 @@ https://www.instagram.com/lashtrainer_marafon/
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton(text='НАЧАТЬ', callback_data='begin'))
-    bot.send_message(message.chat.id, "Привет! Здесь я расскажу тебе, как оплатить участие в первом международном online- проекте для LASH- тренеров.", reply_markup=markup)
-
-@bot.callback_query_handler(func=lambda call: call.data == 'begin')
-def begin_callback(call):
-    bot.send_message(call.message.chat.id, start_message)
+    bot.send_message(message.chat.id, start_message)
 
 # The bot will keep running and listening to incoming messages
 while True:
