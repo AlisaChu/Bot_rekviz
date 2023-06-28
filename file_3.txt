@@ -1,0 +1,19 @@
+.circle::before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 5px;
+    border-radius: 50%;
+    background-color: black;
+    margin-right: 6px;
+
+
+
+
+
+
+
+
+
